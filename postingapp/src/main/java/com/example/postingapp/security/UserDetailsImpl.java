@@ -16,6 +16,7 @@ public class UserDetailsImpl implements UserDetails{
 		this.authorities = authorities;
 	}
 	
+	//Userオブジェクトを返す
 	public User getUser() {
 		return user;
 	}
@@ -51,9 +52,16 @@ public class UserDetailsImpl implements UserDetails{
 		return true;
 	}
 	
+	@Override
 	//ユーザーのパスワードが期限切れでなければtrue
 	public boolean isCredentialsNonExpired() {
 		return true;
+	}
+	
+	@Override
+	//ユーザーが有効であればtrue
+	public boolean isEnabled() {
+		return user.getEnabled();
 	}
 
 }

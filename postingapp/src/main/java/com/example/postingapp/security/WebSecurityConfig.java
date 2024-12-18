@@ -21,20 +21,20 @@ public class WebSecurityConfig {
 		http.authorizeHttpRequests(
 				//全ユーザーにアクセス許可
 				(requests) -> requests
-				.requestMatchers("/css/**").permitAll()
+				.requestMatchers("/css/**", "/signup/**").permitAll()
 				.anyRequest().authenticated()//上記以外のURLはログインが必要
 				)
 		//ログイン設定
 		.formLogin((form) -> form
-				.loginPage("/login")
-				.loginProcessingUrl("/login")
-				.defaultSuccessUrl("/?loggedIn")
-				.failureUrl("/login?error")
+				.loginPage("/login")// ログインページのURL
+				.loginProcessingUrl("/login")// ログインフォームの送信先URL
+				.defaultSuccessUrl("/posts?loggedIn")// ログイン成功時のリダイレクト先URL
+				.failureUrl("/login?error")// ログイン失敗時のリダイレクト先URL
 				.permitAll()
 				)
 		//ログアウト設定
 		.logout((logout) -> logout
-				.logoutSuccessUrl("/login")
+				.logoutSuccessUrl("/login?loggedOut")
 				.permitAll()
 				);
 		
